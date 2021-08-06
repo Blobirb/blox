@@ -3854,7 +3854,7 @@ var Game;
             _this.text.yAlignBounds = Utils.AnchorAlignment.START;
             _this.text.yAlignView = Utils.AnchorAlignment.START;
             _this.text.xAligned = 0;
-            _this.text.yAligned = Game.Y_ARROWS_GAME_BUTTONS + (Game.Level.speedrun ? -1 : 2);
+            _this.text.yAligned = Game.Y_ARROWS_GAME_BUTTONS + (Game.Level.speedrun ? 0 : 2);
             _this.fix();
             return _this;
         }
