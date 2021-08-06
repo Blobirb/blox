@@ -1333,7 +1333,6 @@ var Game;
     Game.HAS_PRELOADER = true;
     Game.HAS_LINKS = true;
     Game.HAS_LINKS_NOADEV = true;
-    Game.HAS_GOOGLE_PLAY_LOGOS = true;
     Game.IS_EDGE = /Edge/.test(navigator.userAgent);
     Game.STEPS_CHANGE_SCENE = 10;
     Game.STEPS_CHANGE_SCENE_AD = 30;
@@ -3349,96 +3348,6 @@ var Game;
 ///<reference path="../../System/Button.ts"/>
 var Game;
 (function (Game) {
-    Game.PLAYSTORE_BUTTON_POSITION = "bottom right";
-    var SCALE = 0.060;
-    var PlayStoreButton = /** @class */ (function (_super) {
-        __extends(PlayStoreButton, _super);
-        function PlayStoreButton() {
-            var _this = _super.call(this) || this;
-            _this.bounds.enabled = true;
-            _this.bounds.pinned = true;
-            _this.arrows.enabled = false;
-            FRAMES[0].applyToSprite(_this.bounds);
-            _this.bounds.xSize *= SCALE;
-            _this.bounds.ySize *= SCALE;
-            /*
-            this.anchor.xAlignBounds = Utils.AnchorAlignment.START;
-            this.anchor.xAlignView = Utils.AnchorAlignment.MIDDLE;
-            this.anchor.yAlignBounds = Utils.AnchorAlignment.END;
-            this.anchor.yAlignView = Utils.AnchorAlignment.MIDDLE;
-            this.anchor.xAligned = 40 + (Engine.Renderer.xSizeView * 0.5 - 40) * 0.5 - this.bounds.xSize * 0.5;
-            this.anchor.yAligned = 56;
-
-            
-            this.anchor.xAlignBounds = Utils.AnchorAlignment.START;
-            this.anchor.xAlignView = Utils.AnchorAlignment.MIDDLE;
-            this.anchor.yAlignBounds = Utils.AnchorAlignment.END;
-            this.anchor.yAlignView = Utils.AnchorAlignment.MIDDLE;
-            this.anchor.xAligned = 43;
-            this.anchor.yAligned = 56;
-            */
-            switch (Game.PLAYSTORE_BUTTON_POSITION) {
-                case "top right":
-                    _this.anchor.xAlignBounds = Utils.AnchorAlignment.END;
-                    _this.anchor.xAlignView = Utils.AnchorAlignment.END;
-                    _this.anchor.yAlignBounds = Utils.AnchorAlignment.START;
-                    _this.anchor.yAlignView = Utils.AnchorAlignment.START;
-                    _this.anchor.xAligned = -3;
-                    _this.anchor.yAligned = 2;
-                    break;
-                case "bottom left":
-                    _this.anchor.xAlignBounds = Utils.AnchorAlignment.START;
-                    _this.anchor.xAlignView = Utils.AnchorAlignment.START;
-                    _this.anchor.yAlignBounds = Utils.AnchorAlignment.END;
-                    _this.anchor.yAlignView = Utils.AnchorAlignment.END;
-                    _this.anchor.xAligned = 3;
-                    _this.anchor.yAligned = -4;
-                    break;
-                case "bottom right":
-                    _this.anchor.xAlignBounds = Utils.AnchorAlignment.END;
-                    _this.anchor.xAlignView = Utils.AnchorAlignment.END;
-                    _this.anchor.yAlignBounds = Utils.AnchorAlignment.END;
-                    _this.anchor.yAlignView = Utils.AnchorAlignment.END;
-                    _this.anchor.xAligned = -3;
-                    _this.anchor.yAligned = -4;
-                    break;
-                case "right":
-                    _this.anchor.xAlignBounds = Utils.AnchorAlignment.END;
-                    _this.anchor.xAlignView = Utils.AnchorAlignment.END;
-                    _this.anchor.yAlignBounds = Utils.AnchorAlignment.MIDDLE;
-                    _this.anchor.yAlignView = Utils.AnchorAlignment.MIDDLE;
-                    _this.anchor.xAligned = -3;
-                    _this.anchor.yAligned = -0.5;
-                    break;
-            }
-            _this.control.url = "https://play.google.com/store/apps/details?id=com.noadev.miniblocks";
-            _this.control.onSelectionStayDelegate = function () {
-                Engine.Renderer.useHandPointer = true;
-            };
-            return _this;
-        }
-        PlayStoreButton.prototype.onViewUpdate = function () {
-            //this.anchor.xAligned = 40 + (Engine.Renderer.xSizeView * 0.5 - 40) * 0.5 - this.bounds.xSize * 0.5;
-        };
-        return PlayStoreButton;
-    }(Game.Button));
-    Game.PlayStoreButton = PlayStoreButton;
-    function TryCreatePlaystoreButton() {
-        if (Game.HAS_LINKS && Game.HAS_GOOGLE_PLAY_LOGOS) {
-            new PlayStoreButton();
-        }
-    }
-    Game.TryCreatePlaystoreButton = TryCreatePlaystoreButton;
-    var FRAMES;
-    Game.addAction("prepare", function () {
-        if (Game.HAS_LINKS && Game.HAS_GOOGLE_PLAY_LOGOS) {
-            FRAMES = Game.FrameSelector.complex("google play button", Game.Resources.textureGooglePlay, 37, 37);
-        }
-    });
-})(Game || (Game = {}));
-///<reference path="../../System/Button.ts"/>
-var Game;
-(function (Game) {
     var MusicButton = /** @class */ (function (_super) {
         __extends(MusicButton, _super);
         function MusicButton() {
@@ -5158,7 +5067,6 @@ var Game;
             Game.Resources.playBGM();
             new Game.MusicButton();
             new Game.SoundButton();
-            Game.TryCreatePlaystoreButton();
             var textmini = new Utils.Text();
             textmini.font = Game.FontManager.a;
             textmini.scale = 1;
@@ -5992,7 +5900,6 @@ var Game;
     var PATH_SFX_BLOCK = "Assets/Block.wom";
     var PATH_SFX_WARP = "Assets/Warp.wom";
     var PATH_SFX_RESPAWN = "Assets/Respawn.wom";
-    var PATH_GOOGLE_PLAY_LOGO = "Assets/google-play-badge.png";
     var Resources = /** @class */ (function () {
         function Resources() {
         }
@@ -6024,15 +5931,8 @@ var Game;
     Game.addAction("preinit", function () {
         Resources.texture = new Engine.Texture(Resources.PATH_TEXTURE_GRAPHICS_0, true, false);
         Resources.texture.preserved = true;
-        if (Game.HAS_LINKS && Game.HAS_GOOGLE_PLAY_LOGOS) {
-            Game.addPath("load", PATH_GOOGLE_PLAY_LOGO);
-        }
     });
     Game.addAction("configure", function () {
-        if (Game.HAS_LINKS && Game.HAS_GOOGLE_PLAY_LOGOS) {
-            Resources.textureGooglePlay = new Engine.Texture(PATH_GOOGLE_PLAY_LOGO, false, true);
-            Resources.textureGooglePlay.preserved = true;
-        }
         Resources.bgm = new Engine.AudioPlayer(PATH_BGM);
         Resources.bgm.preserved = true;
         Resources.bgm.volume = Resources.bgm.restoreVolume = 1;
