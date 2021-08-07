@@ -6034,9 +6034,12 @@ var Game;
         Resources.texture.preserved = true;
     });
     Game.addAction("configure", function () {
+        var bgm_volume = 0.2;
+        var sfx_volume = 0.3;
+
         Resources.bgm = new Engine.AudioPlayer(PATH_BGM);
         Resources.bgm.preserved = true;
-        Resources.bgm.volume = Resources.bgm.restoreVolume = 1;
+        Resources.bgm.volume = Resources.bgm.restoreVolume = bgm_volume;
         if (Engine.AudioManager.mode == Engine.AudioManagerMode.HTML) {
             Resources.bgm.loopEnd = 73.9;
         }
@@ -6046,23 +6049,23 @@ var Game;
         Game.bgms.push(Resources.bgm);
         Resources.sfxJump = new Engine.AudioPlayer(PATH_SFX_JUMP);
         Resources.sfxJump.preserved = true;
-        Resources.sfxJump.volume = Resources.sfxJump.restoreVolume = 1;
+        Resources.sfxJump.volume = Resources.sfxJump.restoreVolume = sfx_volume;
         Game.sfxs.push(Resources.sfxJump);
         Resources.sfxDeath = new Engine.AudioPlayer(PATH_SFX_DEATH);
         Resources.sfxDeath.preserved = true;
-        Resources.sfxDeath.volume = Resources.sfxDeath.restoreVolume = 1;
+        Resources.sfxDeath.volume = Resources.sfxDeath.restoreVolume = sfx_volume;
         Game.sfxs.push(Resources.sfxDeath);
         Resources.sfxBlock = new Engine.AudioPlayer(PATH_SFX_BLOCK);
         Resources.sfxBlock.preserved = true;
-        Resources.sfxBlock.volume = Resources.sfxBlock.restoreVolume = 1;
+        Resources.sfxBlock.volume = Resources.sfxBlock.restoreVolume = sfx_volume;
         Game.sfxs.push(Resources.sfxBlock);
         Resources.sfxWarp = new Engine.AudioPlayer(PATH_SFX_WARP);
         Resources.sfxWarp.preserved = true;
-        Resources.sfxWarp.volume = Resources.sfxWarp.restoreVolume = 1;
+        Resources.sfxWarp.volume = Resources.sfxWarp.restoreVolume = sfx_volume;
         Game.sfxs.push(Resources.sfxWarp);
         Resources.sfxRespawn = new Engine.AudioPlayer(PATH_SFX_RESPAWN);
         Resources.sfxRespawn.preserved = true;
-        Resources.sfxRespawn.volume = Resources.sfxRespawn.restoreVolume = 1;
+        Resources.sfxRespawn.volume = Resources.sfxRespawn.restoreVolume = sfx_volume;
         Game.sfxs.push(Resources.sfxRespawn);
         if (Resources.bgmVolumeTracker < 1) {
             Game.muteAll();
